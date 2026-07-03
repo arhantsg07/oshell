@@ -156,6 +156,22 @@ int main(void)
         if (argc == 0)
             continue;
 
+        if (strcmp(args[0], "cd") == 0)
+        {
+            const char *path = args[1];
+            if (path == NULL)
+            {
+                path = getenv("HOME");
+            }
+
+            if (path == NULL || chdir(path) != 0)
+            {
+                perror("cd");
+            }
+
+            continue;
+        }
+
         /* append command to session history buffer */
 
         /* check for background execution (& as last arg) */
